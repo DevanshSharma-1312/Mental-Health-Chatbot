@@ -61,7 +61,7 @@ const register = async (req, res) => {
         console.log('registraton successfull');
         // const user =  
     } catch (error) {
-        console.log("error is occured in register")
+        console.log("error is occured in register",error)
         res.status(400).send("error")
     }
 }
@@ -73,10 +73,7 @@ const login = async (req, res) => {
     try {
         const user = await User.findOne({ email: email });
         if (!user) {
-            res.
-                status(400).
-                send('no such user registered');
-            return;
+            return res.status(400).send('no such user registered');
         }
         //bcrypt.compare(password,user.password)
         const userPassword = await user.comparePassword(password);

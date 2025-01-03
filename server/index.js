@@ -22,7 +22,7 @@ app.use(express.urlencoded({
 
 
 
-app.use("/api/auth",router,cors());
+app.use("/api/auth",router);
 
 app.use('/api/auth2',contact_router);
 // **********old method now we are using route and controller
