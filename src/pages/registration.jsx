@@ -7,8 +7,15 @@
 
     import React, { useState } from 'react';
     import axios from 'axios';
+    import {useNavigate} from 'react-router-dom';
+    import { useAuth } from '../store/auth';
     
     export const Register = () => {
+
+        const navigate=useNavigate();
+        const auth=useAuth();
+        const {storageTokenInLS}=auth
+
         const [user, setUser] = useState({
             username: "",
             // value: "",
@@ -44,9 +51,36 @@
                     'Content-Type': 'application/json',
                 },
             });
+                // if(response.status===200){
+                //     const res_data=  response;
+                //     console.log(res_data);
+                //     // localStorage.setItem(res_data.data.token)
+                //             // Token.storetokenInLS(res_data.data.token)
+                //    const token= storageTokenInLS(res_data.data.token);
+                //    console.log(token)
+                //     console.log("User registered successfully:", response.data);
+                //     alert(`Registration Successfull from ${user.username}`)
+                //      navigate('/login')
+                // }
+
+                if (response.status === 200) {
+                    const { token } = response.data;
+    
+                    if (storageTokenInLS) {
+                        storageTokenInLS(token); // Store token only if function is available
+                    } else {
+                        console.warn("storageTokenInLS is not defined");
+                    }
+    
+                    console.log("User registered successfully:", response.data);
+                    alert(`Registration Successful, Welcome ${user.username}!`);
+    
+                    navigate("/login");
+                }
+
+
 
             // Log the success message
-            console.log("User registered successfully:", response.data);
         } catch (error) {
             // Handle errors
             if (error.response) {

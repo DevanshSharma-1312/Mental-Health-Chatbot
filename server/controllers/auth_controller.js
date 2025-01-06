@@ -71,17 +71,27 @@ const register = async (req, res) => {
 const login = async (req, res) => {
     const { email, password } = req.body;
     try {
-        const user = await User.findOne({ email: email });
-        if (!user) {
-            return res.status(400).send('no such user registered');
-        }
-        //bcrypt.compare(password,user.password)
-        const userPassword = await user.comparePassword(password);
+        const user = await User.findOne({ email:email });
+
+        
+            console.log(user)
+            if (!user) {
+                console.log('no such user registered')
+               return res.status(400).json({message:'no such user registered'
+                    
+                })
+               
+                
+            }
+            // const userPassword =  bcrypt.compare(password,user.password)
+        
+        const userPassword = await user.comparePassword(password)
+        console.log(userPassword)
         if (userPassword) {
             res.status(200).json({
                 message: "login succussfull",
                 user,
-                toke: await user.generateToken(),
+                token: await user.generateToken(),
                 userId: user._id.toString(),
                 success: true
             })
@@ -104,7 +114,7 @@ const contact = async (req, res) => {
         const user_contact = await contactModel.findOne({ email: email })
         if (user_contact) {
             console.log('user contacted the admin in past also');
-            res.status(201).send("this user already exsist");
+           return res.status(201).send("this user already exsist");
         }
         const contactForm=await contactModel.create({
             username,
@@ -112,11 +122,13 @@ const contact = async (req, res) => {
             phone,
             message
         })
+        console.log("contact form submitted successfully",contactForm)
         res.status(200).json({
             success: true,
             message: "user details saved in db",
             contactForm
         })
+        
     } catch (error) {
         console.log(error);
         res.status(400).json({

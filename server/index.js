@@ -9,7 +9,7 @@ const PORT = 5000
 
 
 const corsoption={
-    'Access-Control-Allow-Origin': "http://localhost:3000",
+    origin: "http://localhost:3000",
     Credential:true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     optionsSuccessStatus: 200

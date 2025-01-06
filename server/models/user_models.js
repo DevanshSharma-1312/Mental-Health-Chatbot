@@ -74,9 +74,10 @@ userSchema.methods.generateToken = async function () {
 
 userSchema.methods.comparePassword= async function (password){
     try {
-        return  bcrypt.compare(password,this.password)
+        return await bcrypt.compare(password,this.password);
     } catch (error) {
-        console.log("error occured in compare method ", error)
+        console.log("error occured in compare method ", error);
+        // return res.status(500).json({ message: "Internal server error", error: error.message });
     }
 } 
 const User = mongoose.model('User', userSchema);
