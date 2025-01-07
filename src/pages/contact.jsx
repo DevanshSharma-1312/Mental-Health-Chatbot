@@ -42,6 +42,8 @@ export const Contact = () => {
     }
 
     return (
+        <div className=" bg-black  h-screen">
+
         <h1>you are on contact page </h1>,
 
         <section className='border-sky-800 justify-items-end'>
@@ -97,5 +99,6 @@ export const Contact = () => {
             </form >
 
         </section>
+        </div>
     );
 }

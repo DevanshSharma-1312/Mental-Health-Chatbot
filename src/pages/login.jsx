@@ -108,9 +108,9 @@ import { useAuth } from '../store/auth';
 
 export const Login = () => {
 
-    const navigate=useNavigate();
+    const navigate = useNavigate();
     const auth = useAuth();
-    const{storageTokenInLS}=auth;
+    const { storageTokenInLS } = auth;
 
 
     const [input, setInput] = useState({
@@ -150,9 +150,9 @@ export const Login = () => {
                     'Content-Type': 'application/json',
                 },
             });
-              if(response.status===200){
+            if (response.status === 200) {
                 const { token } = response.data;
-    
+
                 if (storageTokenInLS) {
                     storageTokenInLS(token); // Store token only if function is available
                 } else {
@@ -160,10 +160,10 @@ export const Login = () => {
                 }
 
                 //    localStorage.setItem('token',response.data.token)
-                  console.log('Login successful:', response.data);
-                  alert('Login successful!');
-                  navigate('/')
-              }
+                console.log('Login successful:', response.data);
+                alert('Login successful!');
+                navigate('/')
+            }
             // Redirect or handle success
         } catch (err) {
             console.error('Login error:', err);
@@ -171,67 +171,70 @@ export const Login = () => {
             if (err.response) {
                 setError(err.response.data.message || 'Login failed. Please check your credentials.');
             } else {
-                setError('Network error. Please try again later.',err);
+                setError('Network error. Please try again later.', err);
             }
 
         }
     };
 
     return (
-        <section>
-            <h1 className="text-center font-sans text-2xl text-cyan-600">LOGIN FORM</h1>
-            <form className="justify-between" onSubmit={handleFormSubmit}>
-                <div className="justify-between flex py-20 mx-10">
-                    <div>
-                        <img
-                            src="./Image02.png"
-                            alt="Placeholder"
-                            className="rounded"
-                        />
-                    </div>
-                    <div className="border-2 border-emerald-950 h-52 rounded m-7 p-5">
-                        <div className="mb-5">
-                            <label htmlFor="email" className="block text-xl text-blue-300">
-                                Email:
-                            </label>
-                            <input
-                                className="block w-full p-2 border rounded text-white"
-                                type="email"
-                                name="email"
-                                value={input.email}
-                                onChange={handleInputChange}
-                                autoComplete="off"
-                                id="email"
-                                required
-                                placeholder="Enter your email"
+        <div className=" bg-black  h-screen ">
+
+            <section className=" bg-black  h-screen">
+                <h1 className="text-center font-sans text-2xl text-cyan-600">LOGIN FORM</h1>
+                <form className="justify-between" onSubmit={handleFormSubmit}>
+                    <div className="justify-between flex py-20 mx-10">
+                        <div>
+                            <img
+                                src="./Image02.png"
+                                alt="Placeholder"
+                                className="rounded"
                             />
                         </div>
-                        <div className="mb-5">
-                            <label htmlFor="password" className="block text-xl text-blue-300">
-                                Password:
-                            </label>
-                            <input
-                                className="block w-full p-2 border rounded text-white"
-                                type="password"
-                                name="password"
-                                value={input.password}
-                                onChange={handleInputChange}
-                                autoComplete="off"
-                                id="password"
-                                required
-                                placeholder="Enter your password"
-                            />
+                        <div className="border-2 border-emerald-950 h-52 rounded m-7 p-5">
+                            <div className="mb-5">
+                                <label htmlFor="email" className="block text-xl text-blue-300">
+                                    Email:
+                                </label>
+                                <input
+                                    className="block w-full p-2 border rounded bg-gray-700 text-white"
+                                    type="email"
+                                    name="email"
+                                    value={input.email}
+                                    onChange={handleInputChange}
+                                    autoComplete="off"
+                                    id="email"
+                                    required
+                                    placeholder="Enter your email"
+                                />
+                            </div>
+                            <div className="mb-5">
+                                <label htmlFor="password" className="block text-xl text-blue-300">
+                                    Password:
+                                </label>
+                                <input
+                                    className="block w-full p-2 border rounded bg-gray-700 text-white"
+                                    type="password"
+                                    name="password"
+                                    value={input.password}
+                                    onChange={handleInputChange}
+                                    autoComplete="off"
+                                    id="password"
+                                    required
+                                    placeholder="Enter your password"
+                                />
+                            </div>
+                            {error && <p className="text-red-500">{error}</p>}
+                            <button
+                                type="submit"
+                                className="block w-full py-2 bg-emerald-700 text-white rounded"
+                            >
+                                LOGIN
+                            </button>
                         </div>
-                        {error && <p className="text-red-500">{error}</p>}
-                        <button
-                            type="submit"
-                            className="block w-full py-2 bg-emerald-700 text-white rounded"
-                        >
-                            LOGIN
-                        </button>
                     </div>
-                </div>
-            </form>
-        </section>
+                </form>
+            </section>
+        </div>
     );
 };

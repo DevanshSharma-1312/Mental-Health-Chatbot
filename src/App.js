@@ -11,6 +11,7 @@ import { Service } from './pages/service';
 import { Login } from './pages/login';
 import { Register } from './pages/registration';
 import { Navbar } from './component/Navbar';
+import LandingPage from './pages/LandingPage';
 
 function App() {
   // const Navigate = useNavigate();
@@ -18,7 +19,7 @@ function App() {
     < BrowserRouter>
     <Navbar/>
       <Routes>
-      <Route path='/' element={<Home/>} />
+      <Route path='/' element={<LandingPage/>} />
         <Route path='/home' element={<Home/>} />
         <Route path='/contact' element={<Contact/>}/>
         <Route path='/about' element={<About/>}/>

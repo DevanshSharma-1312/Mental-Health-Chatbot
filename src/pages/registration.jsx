@@ -93,24 +93,27 @@
                 // Error setting up the request
                 console.error("Error during registration:", error.message);
             }
+            console.log(error);
         }
     };
 
 
     return (
         <>
-            <section>
+        <div className=" bg-black  h-screen ">
+
+            <section >
                 <main>
                     <div>
                         <div className='container mx-auto grid grid-cols-2 gap-4 mt-20'>
-                            <div>
+                            {/* <div>
                                 <img
                                     src="../component/philippe-oursel-7wCEHSkMSdw-unsplash.jpg"
                                     alt=" "
                                     width='400'
                                     height='500'
                                 />
-                            </div>
+                            </div> */}
 
                             <div>
                                 <h1 className='text-xl font-medium'>Registration Form</h1>
@@ -181,7 +184,7 @@
                                             autoComplete='off'
                                             placeholder='phone'
                                             className='bg-white text-center rounded text-black mt-1 block'
-                                        />
+                                            />
                                     </div>
 
                                     <div>
@@ -230,6 +233,7 @@
                     </div>
                 </main>
             </section>
+        </div>
         </>
     );
 };
