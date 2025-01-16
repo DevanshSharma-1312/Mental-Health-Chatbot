@@ -7,7 +7,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import {Home} from './pages/home';
 import {Contact} from './pages/contact';
 import {About} from './pages/about';
-import { Service } from './pages/service';
+import  Service  from './pages/service';
 import { Login } from './pages/login';
 import { Register } from './pages/registration';
 import { Navbar } from './component/Navbar';

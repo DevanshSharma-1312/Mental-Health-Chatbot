@@ -24,10 +24,9 @@ const validation_signupSchema = z.object({
 
 
     age: z
-    .number({ required_error: "age is required" })
-    
-    .min(15, {message:"you are uneraged"})
-    .max(60, {message:"sorry, your age exceeds the terms and condition"}),
+    .string({ required_error: "age is required" }),
+    // .min(15, {message:"you are uneraged"})
+    // .max(60, {message:"sorry, your age exceeds the terms and condition"}),
 
 
 
@@ -41,4 +40,4 @@ const validation_signupSchema = z.object({
 )
 
 
-module.exports= {validation_signupSchema};
+module.exports= validation_signupSchema;

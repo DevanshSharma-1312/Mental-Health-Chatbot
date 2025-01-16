@@ -4,6 +4,7 @@ const cors = require('cors')
 const router = require('./router/auth_router')
 const {connectDb} = require('./database/db');
 const contact_router = require('./router/contact_route');
+const services = require('../server/router/services_route')
 const PORT = 5000
 
 
@@ -25,6 +26,8 @@ app.use(express.urlencoded({
 app.use("/api/auth",router);
 
 app.use('/api/auth2',contact_router);
+
+app.use('/api/auth3',services);
 // **********old method now we are using route and controller
 // app.get("/",(req,res)=>{
     //     res.status(200).send("hello from my first server");

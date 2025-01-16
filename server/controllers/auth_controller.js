@@ -1,7 +1,7 @@
 const express = require('express');
 // const { default: mongoose } = require('mongoose');
 const User = require('../models/user_models');
-
+const Service =require('../models/contact_model');
 const contactModel = require('../models/contact_model')
 const bcrypt = require('bcrypt');
 
@@ -25,7 +25,7 @@ const register = async (req, res) => {
 
 
     const { username, age, phone, password, isAdmin, email } = req.body;
-
+console.log(req.body)
     try {
         // console.log(req.body);
         // res.status(200).json({data,message:"ths is first route from  auth_route "});    ??old way
@@ -61,7 +61,7 @@ const register = async (req, res) => {
         console.log('registraton successfull');
         // const user =  
     } catch (error) {
-        console.log("error is occured in register",error)
+        console.log("error is occured in register", error)
         res.status(400).send("error")
     }
 }
@@ -71,20 +71,21 @@ const register = async (req, res) => {
 const login = async (req, res) => {
     const { email, password } = req.body;
     try {
-        const user = await User.findOne({ email:email });
+        const user = await User.findOne({ email: email });
 
-        
-            console.log(user)
-            if (!user) {
-                console.log('no such user registered')
-               return res.status(400).json({message:'no such user registered'
-                    
-                })
-               
-                
-            }
-            // const userPassword =  bcrypt.compare(password,user.password)
-        
+
+        console.log(user)
+        if (!user) {
+            console.log('no such user registered')
+            return res.status(400).json({
+                message: 'no such user registered'
+
+            })
+
+
+        }
+        // const userPassword =  bcrypt.compare(password,user.password)
+
         const userPassword = await user.comparePassword(password)
         console.log(userPassword)
         if (userPassword) {
@@ -114,21 +115,21 @@ const contact = async (req, res) => {
         const user_contact = await contactModel.findOne({ email: email })
         if (user_contact) {
             console.log('user contacted the admin in past also');
-           return res.status(201).send("this user already exsist");
+            return res.status(201).send("this user already exsist");
         }
-        const contactForm=await contactModel.create({
+        const contactForm = await contactModel.create({
             username,
             email,
             phone,
             message
         })
-        console.log("contact form submitted successfully",contactForm)
+        console.log("contact form submitted successfully", contactForm)
         res.status(200).json({
             success: true,
             message: "user details saved in db",
             contactForm
         })
-        
+
     } catch (error) {
         console.log(error);
         res.status(400).json({
@@ -138,9 +139,47 @@ const contact = async (req, res) => {
     }
 }
 
+const user = async (req, res)=>{
+    try {
+        const userData=req.user;
+        return res.status(200).json({
+            mssg:"user data is here ",
+            success:true,
+            userData
+        })
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+const service= async(req,res)=>{
+    try {
+        const response = await Service.find();
+        if(!response){
+            res.status(404).json({
+                mssg:"no services data fetched succesfully ",
+                success:false,
+               
+            })
+        }
+        res.status(200).json({
+            mssg:"services data fetched succesfully ",
+            success:true,
+            response
+        })
+    } catch (error) {
+        console.log('error occured in services controller',error)
+        res.status(404).json({
+            mssg:"error in srvices ",
+            success:false
+        })
+    }
+}
 module.exports = {
     home,
     register,
     login,
-    contact
+    contact,
+    user,
+    service
 };

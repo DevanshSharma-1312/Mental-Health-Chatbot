@@ -223,6 +223,10 @@
 import React from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+// import { useAuth } from "../store/auth";
+
+
+
 
 export const Home = () => {
   return (
@@ -282,7 +286,7 @@ export const Home = () => {
         <div className="container mx-auto text-center">
           <h2 className="text-3xl font-bold text-white mb-8">Features</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-gray-700 p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
+            <div className="bg-gray-700 p-6 rounded-lg shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-xl">
               <h3 className="text-xl font-semibold mb-3 text-blue-400">
                 AI Navigation
               </h3>
@@ -290,7 +294,7 @@ export const Home = () => {
                 Always stay on track with advanced AI-based navigation systems.
               </p>
             </div>
-            <div className="bg-gray-700 p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
+            <div className="bg-gray-700 p-6 rounded-lg shadow-lg  transform transition duration-300 hover:scale-105 hover:shadow-xl">
               <h3 className="text-xl font-semibold mb-3 text-blue-400">
                 Predictive Maintenance
               </h3>
@@ -298,7 +302,7 @@ export const Home = () => {
                 Use AI to predict and prevent potential issues in advance.
               </p>
             </div>
-            <div className="bg-gray-700 p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
+            <div className="bg-gray-700 p-6 rounded-lg shadow-lg  transform transition duration-300 hover:scale-105 hover:shadow-xl">
               <h3 className="text-xl font-semibold mb-3 text-blue-400">
                 Enhanced Safety
               </h3>
